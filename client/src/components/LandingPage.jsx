@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function LandingPage() {
+function LandingPage(props) {
     const [query, setQuery] = useState('');
 
     function handleChange(event) {
@@ -19,6 +19,7 @@ function LandingPage() {
         });
         const data = await res.json();
         console.log('Response from backend:', data);
+        props.handleStartQuiz(data);
     };
 
     return (

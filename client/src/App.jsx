@@ -1,31 +1,30 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import axios from 'axios';
 import MultipleChoice from './components/MultipleChoice';
 import LandingPage from './components/LandingPage';
 
 function App() {
-    const [count, setCount] = useState(0);
-    const [array, setArray] = useState([]);
+    const [showQuiz, setShowQuiz] = useState(false);
+    const [quizData, setQuizData] = useState([]);
+    const [quizOptions, setQuizOptions] = useState([]);
 
-    const fetchAPi = async () => {
-        const response = await axios.get('http://localhost:8080/api');
-        setArray(response.data.fruits);
-        // console.log(response.data.fruits);
-    };
-
-    useEffect(() => {
-        fetchAPi();
-    }, []);
+    function handleStartQuiz(data) {
+        setQuizData(data);
+        setShowQuiz(true);
+        const charData = [
+            ...new Set(data.data.map((quote) => quote.character)),
+        ];
+        setQuizOptions(charData);
+    }
 
     return (
-        <>
-            <div>
-                <LandingPage />
-
-                {/* <MultipleChoice /> */}
-            </div>
-        </>
+        <div>
+            {showQuiz ? (
+                <MultipleChoice data={quizData} charData={quizOptions} />
+            ) : (
+                <LandingPage handleStartQuiz={handleStartQuiz} />
+            )}
+        </div>
     );
 }
 
