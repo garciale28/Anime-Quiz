@@ -1,97 +1,68 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import ChoiceInput from './ChoiceInput';
+import GameOver from './GameOver';
 
-function MultipleChoice(props) {
-    const options = [];
+function MultipleChoice({ data, charData }) {
+    const [score, setScore] = useState(0);
+    const [quote, setQuote] = useState({});
+    const [options, setOptions] = useState([]);
+    const [gameOver, setGameOver] = useState(false);
 
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
 
-    const quote = useMemo(() => {
-        return props.data.data[getRandomInt(props.data.data.length)];
-    }, [props.data.data]);
+    function generateQuestion() {
+        const newQuote = data.data[getRandomInt(data.data.length)];
 
-    for (let i = 0; i < 4; i++) {
-        options.push(props.charData[getRandomInt(45)]);
+        const newOptions = [];
+        for (let i = 0; i < 4; i++) {
+            newOptions.push(charData[getRandomInt(charData.length)]);
+        }
+
+        newOptions[getRandomInt(4)] = newQuote.character;
+
+        setQuote(newQuote);
+        setOptions(newOptions);
     }
-    options[getRandomInt(4)] = quote.character;
+
+    function updateScore(num) {
+        if (num === 1) {
+            setScore(score + num);
+        }
+        if (num === 0) {
+            setScore(0);
+            setGameOver(true);
+        }
+    }
+
+    function startOver() {
+        setGameOver(false);
+    }
+
+    useEffect(() => {
+        generateQuestion();
+    }, []);
 
     console.log(quote);
-    console.log(options);
 
+    //add a conditional render between the quiz page and game over page.
     return (
         <div>
-            <h1>{quote.quote}</h1>
-            <ul className="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                    <div className="flex items-center ps-3">
-                        <input
-                            id="list-radio-license"
-                            type="radio"
-                            value=""
-                            name="list-radio"
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                        />
-                        <label
-                            htmlFor="list-radio-license"
-                            className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                            {options[0]}
-                        </label>
-                    </div>
-                </li>
-                <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                    <div className="flex items-center ps-3">
-                        <input
-                            id="list-radio-id"
-                            type="radio"
-                            value=""
-                            name="list-radio"
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                        />
-                        <label
-                            htmlFor="list-radio-id"
-                            className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                            {options[1]}
-                        </label>
-                    </div>
-                </li>
-                <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                    <div className="flex items-center ps-3">
-                        <input
-                            id="list-radio-military"
-                            type="radio"
-                            value=""
-                            name="list-radio"
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                        />
-                        <label
-                            htmlFor="list-radio-military"
-                            className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                            {options[2]}
-                        </label>
-                    </div>
-                </li>
-                <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                    <div className="flex items-center ps-3">
-                        <input
-                            id="list-radio-passport"
-                            type="radio"
-                            value=""
-                            name="list-radio"
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                        />
-                        <label
-                            htmlFor="list-radio-passport"
-                            className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                            {options[3]}
-                        </label>
-                    </div>
-                </li>
-            </ul>
+            {gameOver ? (
+                <GameOver startOver={startOver} />
+            ) : (
+                <div>
+                    <h1>{quote.quote}</h1>
+                    <h3>Your score is {score}</h3>
+                    <ChoiceInput
+                        options={options}
+                        answer={quote.character}
+                        updateScore={updateScore}
+                        generateQuestion={generateQuestion}
+                    />
+                </div>
+            )}
         </div>
     );
 }
