@@ -48,19 +48,21 @@ function MultipleChoice({ data, charData }) {
 
     //add a conditional render between the quiz page and game over page.
     return (
-        <div>
+        <div className="game-div">
             {gameOver ? (
                 <GameOver startOver={startOver} />
             ) : (
                 <div>
                     <h1>{quote.quote}</h1>
                     <h3>Your score is {score}</h3>
-                    <ChoiceInput
-                        options={options}
-                        answer={quote.character}
-                        updateScore={updateScore}
-                        generateQuestion={generateQuestion}
-                    />
+                    <div className="choice-wrapper">
+                        <ChoiceInput
+                            options={options}
+                            answer={quote.character}
+                            updateScore={updateScore}
+                            generateQuestion={generateQuestion}
+                        />
+                    </div>
                 </div>
             )}
         </div>

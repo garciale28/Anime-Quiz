@@ -24,7 +24,7 @@ function LandingPage(props) {
 
     return (
         <div>
-            <h1>Enter an anime: </h1>
+            <h1 className="anime-h1">Enter an anime: </h1>
             <form>
                 <label
                     htmlFor="search"
