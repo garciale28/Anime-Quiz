@@ -15,10 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/submit', async (req, res) => {
+    const userInput = req.body.query;
+    const anime = userInput.replaceAll(' ', '%20').toLowerCase();
+
     try {
-        const response = await axios.get(showApi + req.body.query);
+        const response = await axios.get(showApi + anime);
         const data = response.data;
-        // console.log(data);
         res.json({ data });
     } catch (error) {
         console.error('Error fetching data:', error);
