@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import ChoiceInput from './ChoiceInput';
 import GameOver from './GameOver';
 
-function MultipleChoice({ data, charData }) {
+function MultipleChoice({ data, charData, resetAnime }) {
     const [score, setScore] = useState(0);
     const [quote, setQuote] = useState({});
     const [options, setOptions] = useState([]);
@@ -49,11 +49,11 @@ function MultipleChoice({ data, charData }) {
     return (
         <div className="game-div">
             {gameOver ? (
-                <GameOver startOver={startOver} />
+                <GameOver startOver={startOver} resetAnime={resetAnime} />
             ) : (
                 <div>
-                    <p className="quote">{quote.quote}</p>
                     <p className="score">Your score is {score}</p>
+                    <p className="quote">{quote.quote}</p>
                     <div className="choice-wrapper">
                         <ChoiceInput
                             options={options}

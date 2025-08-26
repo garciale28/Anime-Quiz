@@ -17,10 +17,18 @@ function App() {
         setQuizOptions(charData);
     }
 
+    function resetAnime() {
+        setShowQuiz(false);
+    }
+
     return (
         <div>
             {showQuiz ? (
-                <MultipleChoice data={quizData} charData={quizOptions} />
+                <MultipleChoice
+                    data={quizData}
+                    charData={quizOptions}
+                    resetAnime={resetAnime}
+                />
             ) : (
                 <LandingPage handleStartQuiz={handleStartQuiz} />
             )}

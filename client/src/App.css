@@ -60,15 +60,19 @@ body {
 
 .choice-list {
     display: grid;
-    gap: 1rem;
-    margin-top: 1.5rem;
+    /* gap: 1rem; */
+    margin: 1rem 0;
     list-style: none;
     padding: 0;
 }
 
 .choice-item {
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
     display: flex;
     align-items: center;
+    transition: background-color 0.3s ease;
 }
 .choice-item input[type='radio'] {
     display: none; /* hide default radio */
@@ -84,6 +88,15 @@ body {
     position: absolute;
     opacity: 0;
     pointer-events: none;
+    margin-right: 0.5rem;
+}
+
+.choice-item.correct {
+    background-color: #4ade80; /* green */
+}
+
+.choice-item.wrong {
+    background-color: #f87171; /* red */
 }
 .choice-item label {
     flex: 1;

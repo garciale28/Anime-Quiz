@@ -9,40 +9,49 @@ function ChoiceInput({
     answer,
 }) {
     const [selectedOption, setSelectedOption] = useState('');
+    const [highlight, setHighlight] = useState('');
 
     function handleChange(event) {
         const userSelection = event.target.value;
         setSelectedOption(userSelection);
 
         if (userSelection === answer) {
-            console.log('Correct!!');
+            setHighlight('correct');
             updateScore(1);
-            generateQuestion();
         } else {
-            console.log('Wrong!!');
+            setHighlight('wrong');
             updateScore(0);
         }
-    }
 
-    useEffect(() => {
-        setSelectedOption('');
-    }, [options]);
+        setTimeout(() => {
+            setSelectedOption('');
+            setHighlight('');
+            generateQuestion();
+        }, 1000);
+    }
 
     return (
         <ul className="choice-list">
-            {options.map((character, idx) => (
-                <li key={idx} className="choice-item">
-                    <input
-                        type="radio"
-                        id={`choice-${idx}`}
-                        name="quiz-choice"
-                        value={character}
-                        checked={selectedOption === character}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor={`choice-${idx}`}>{character}</label>
-                </li>
-            ))}
+            {options.map((character, idx) => {
+                let className = 'choice-item';
+                if (selectedOption === character) {
+                    if (highlight === 'correct') className += ' correct';
+                    if (highlight === 'wrong') className += ' wrong';
+                }
+                return (
+                    <li key={idx} className={className}>
+                        <input
+                            type="radio"
+                            id={`choice-${idx}`}
+                            name="quiz-choice"
+                            value={character}
+                            checked={selectedOption === character}
+                            onChange={handleChange}
+                        />
+                        <label htmlFor={`choice-${idx}`}>{character}</label>
+                    </li>
+                );
+            })}
         </ul>
     );
 }
