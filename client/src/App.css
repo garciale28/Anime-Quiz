@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 body {
-    background-color: #a1c181;
+    background-color: #2f4550;
 }
 
 #root {
@@ -18,12 +18,38 @@ body {
 }
 
 .game-div {
-    background-color: #fe7f2d;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* background-color: #fe7f2d; */
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    color: #fff;
+    text-align: center;
+}
+
+.quote {
+    background-color: #b8dbd9;
+    font-size: 1.25rem;
+    font-weight: 500;
+    max-width: 800px;
+    margin: 0 auto 1.5rem auto;
+    line-height: 1.5;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.score {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #222;
+    background: #fff;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
 }
 
 .choice-wrapper {

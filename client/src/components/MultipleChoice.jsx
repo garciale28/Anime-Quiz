@@ -46,15 +46,14 @@ function MultipleChoice({ data, charData }) {
 
     console.log(quote);
 
-    //add a conditional render between the quiz page and game over page.
     return (
         <div className="game-div">
             {gameOver ? (
                 <GameOver startOver={startOver} />
             ) : (
                 <div>
-                    <h1>{quote.quote}</h1>
-                    <h3>Your score is {score}</h3>
+                    <p className="quote">{quote.quote}</p>
+                    <p className="score">Your score is {score}</p>
                     <div className="choice-wrapper">
                         <ChoiceInput
                             options={options}

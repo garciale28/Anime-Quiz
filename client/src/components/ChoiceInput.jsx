@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 
 function ChoiceInput({
     generateQuestion,
@@ -7,8 +8,11 @@ function ChoiceInput({
     props,
     answer,
 }) {
+    const [selectedOption, setSelectedOption] = useState('');
+
     function handleChange(event) {
         const userSelection = event.target.value;
+        setSelectedOption(userSelection);
 
         if (userSelection === answer) {
             console.log('Correct!!');
@@ -20,6 +24,10 @@ function ChoiceInput({
         }
     }
 
+    useEffect(() => {
+        setSelectedOption('');
+    }, [options]);
+
     return (
         <ul className="choice-list">
             {options.map((character, idx) => (
@@ -29,6 +37,7 @@ function ChoiceInput({
                         id={`choice-${idx}`}
                         name="quiz-choice"
                         value={character}
+                        checked={selectedOption === character}
                         onChange={handleChange}
                     />
                     <label htmlFor={`choice-${idx}`}>{character}</label>
