@@ -8,7 +8,6 @@ const corsOptions = {
 };
 
 const showApi = 'http://yurippe.vercel.app/api/quotes?show=';
-// const characterApi = 'https://yurippe.vercel.app/api/quotes?character='
 
 app.use(cors(corsOptions));
 app.use(express.json());
