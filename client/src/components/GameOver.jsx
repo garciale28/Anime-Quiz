@@ -10,10 +10,23 @@ function GameOver({ startOver, resetAnime }) {
     }
 
     return (
-        <div>
-            <h1>Game Over</h1>
-            <button onClick={handleClick}>Play again</button>
-            <button onClick={handleReset}>Reset Anime</button>
+        <div className="game-over-div">
+            <h1 className="text-3xl font-bold mb-2">Game Over</h1>
+            <h2 className="loser-heading text-lg mb-6">Fucking Loser</h2>
+            <div className="flex gap-4 justify-center">
+                <button
+                    className="play-again-button px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    onClick={handleClick}
+                >
+                    Play again
+                </button>
+                <button
+                    className="reset-button px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                    onClick={handleReset}
+                >
+                    Reset Anime
+                </button>
+            </div>
         </div>
     );
 }

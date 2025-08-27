@@ -12,7 +12,7 @@ body {
 }
 
 .anime-h1 {
-    color: #233d4d;
+    color: #f4f4f9;
     margin-bottom: 20px;
     padding-bottom: 10px;
 }
@@ -60,7 +60,6 @@ body {
 
 .choice-list {
     display: grid;
-    /* gap: 1rem; */
     margin: 1rem 0;
     list-style: none;
     padding: 0;
@@ -74,11 +73,7 @@ body {
     align-items: center;
     transition: background-color 0.3s ease;
 }
-.choice-item input[type='radio'] {
-    display: none; /* hide default radio */
-}
 
-/* hover effect */
 .choice-item label:hover {
     border-color: #fe7f2d;
     background: #fff7f2;
@@ -91,12 +86,14 @@ body {
     margin-right: 0.5rem;
 }
 
-.choice-item.correct {
-    background-color: #4ade80; /* green */
+.choice-item.correct label {
+    background-color: #4ade80 !important;
+    color: white;
 }
 
-.choice-item.wrong {
-    background-color: #f87171; /* red */
+.choice-item.wrong label {
+    background-color: #f87171 !important;
+    color: white;
 }
 .choice-item label {
     flex: 1;
@@ -116,13 +113,4 @@ body {
 .choice-item input:checked + label {
     background: #3b82f6;
     color: white;
-}
-
-/* when checked */
-.choice-item input[type='radio']:checked + label {
-    border-color: #fe7f2d;
-    background: #fe7f2d;
-    color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transform: scale(1.02);
 }

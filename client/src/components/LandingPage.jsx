@@ -62,7 +62,7 @@ function LandingPage(props) {
                     <button
                         type="submit"
                         onClick={handleClick}
-                        className="absolute top-1/2 -translate-y-1/2 right-2 flex items-center px-3 py-1.5 text-sm text-white absolute p-2.5 end-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="absolute top-1/2 -translate-y-1/2 right-2 flex items-center h-8 px-4 text-base text-white absolute end-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
                         Search
                     </button>

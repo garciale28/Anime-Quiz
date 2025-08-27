@@ -32,7 +32,9 @@ function MultipleChoice({ data, charData, resetAnime }) {
         }
         if (num === 0) {
             setScore(0);
-            setGameOver(true);
+            setTimeout(() => {
+                setGameOver(true);
+            }, 1000);
         }
     }
 
