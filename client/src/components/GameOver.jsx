@@ -11,7 +11,7 @@ function GameOver({ startOver, resetAnime }) {
 
     return (
         <div className="game-over-div">
-            <h1 className="text-3xl font-bold mb-2">Game Over</h1>
+            <img src="https://images.cooltext.com/5738646.gif" />
             <h2 className="loser-heading text-lg mb-6">Fucking Loser</h2>
             <div className="flex gap-4 justify-center">
                 <button

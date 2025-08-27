@@ -24,6 +24,7 @@ function LandingPage(props) {
 
     return (
         <div>
+            <img src="https://images.cooltext.com/5738645.png" />
             <h1 className="anime-h1">Enter an anime: </h1>
             <form>
                 <label
