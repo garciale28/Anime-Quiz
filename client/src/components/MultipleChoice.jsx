@@ -14,13 +14,17 @@ function MultipleChoice({ data, charData, resetAnime }) {
 
     function generateQuestion() {
         const newQuote = data.data[getRandomInt(data.data.length)];
+        const correctAnswer = newQuote.character;
 
-        const newOptions = [];
-        for (let i = 0; i < 4; i++) {
-            newOptions.push(charData[getRandomInt(charData.length)]);
-        }
+        const incorrectPool = charData.filter((c) => c !== correctAnswer);
 
-        newOptions[getRandomInt(4)] = newQuote.character;
+        const incorrectOptions = [...incorrectPool]
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 3);
+
+        const newOptions = [...incorrectOptions, correctAnswer].sort(
+            () => 0.5 - Math.random()
+        );
 
         setQuote(newQuote);
         setOptions(newOptions);
@@ -54,7 +58,7 @@ function MultipleChoice({ data, charData, resetAnime }) {
                 <GameOver startOver={startOver} resetAnime={resetAnime} />
             ) : (
                 <div>
-                    <p className="score">Your score is {score}</p>
+                    <p className="score">Your score: {score}</p>
                     <p className="quote">{quote.quote}</p>
                     <div className="choice-wrapper">
                         <ChoiceInput
